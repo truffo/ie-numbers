@@ -57,8 +57,8 @@ class ArrayDigit
         $curry = 1;
         foreach ($reverse as $key => $digit) {
             $digit += $curry;
-            list($localDigit, $curry) = self::decompose($digit);
-            $result[$key] = $localDigit;
+            $curry = intdiv($digit, 10);
+            $result[$key] = $digit % 10;
         }
 
         if (0 !== $curry) {
@@ -66,10 +66,5 @@ class ArrayDigit
         }
 
         return self::createWithClassicalArray(array_reverse($result));
-    }
-
-    public static function decompose(int $digit): array
-    {
-        return [$digit % 10, intdiv($digit, 10)];
     }
 }
